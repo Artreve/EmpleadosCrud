@@ -3,6 +3,6 @@ import empleadosReducer from "../features/empleados/empleadosSlice";
 
 export const store = configureStore({
     reducer:{
-        empleados: empleadosReducer
+        employed: empleadosReducer
     }
 })
