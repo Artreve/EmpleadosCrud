@@ -1,8 +1,13 @@
 import React from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
+import { deleteEmployed } from "../features/empleados/empleadosSlice";
 function EmployedList() {
+  const dispatch = useDispatch()
   const empleados = useSelector((state) => state.employed.empleados);
+  const handleDelete = (id) =>{
+  dispatch(deleteEmployed(id))
+  }
   const empleadoArray = empleados.map((empleado) => {
     return (
       <div className="col-sm-6 mb-sm-0" key={empleado.employee_id}>
@@ -17,17 +22,20 @@ function EmployedList() {
             <button type="button" className="btn btn-info">
               Ver
             </button>
+            <button onClick={()=>handleDelete(empleado.employee_id)} type="button" className="btn btn-danger mx-3">
+              Borrar
+            </button>
           </div>
         </div>
       </div>
     );
   });
-  console.log(empleados);
+  console.log('listado de empleados: ' + empleados);
   return (
     <div className="container">
       <div className="row">
         <div className="col-6 col-md-4 mt-3">
-          <Link to='create_employed' type="button" class="btn btn-success fw-bold mx-2">
+          <Link to='create_employed' type="button" className="btn btn-success fw-bold mx-2">
             Crear nuevo empleado
           </Link>
         </div>

@@ -8,7 +8,7 @@ function NavBar() {
             <div className="container-fluid">
                 <a className="navbar-brand">Primer Tp</a>
                 <form className="d-flex" role="search">
-                <Link className="btn btn-primary" type="submit">Inicio</Link>
+                <Link to= '/' className="btn btn-primary" type="submit">Inicio</Link>
                 </form>
             </div>
         </nav>
