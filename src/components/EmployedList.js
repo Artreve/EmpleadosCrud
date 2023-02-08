@@ -3,11 +3,11 @@ import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import { deleteEmployed } from "../features/empleados/empleadosSlice";
 function EmployedList() {
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   const empleados = useSelector((state) => state.employed.empleados);
-  const handleDelete = (id) =>{
-  dispatch(deleteEmployed(id))
-  }
+  const handleDelete = (id) => {
+    dispatch(deleteEmployed(id));
+  };
   const empleadoArray = empleados.map((empleado) => {
     return (
       <div className="col-sm-6 mb-sm-0" key={empleado.employee_id}>
@@ -19,10 +19,18 @@ function EmployedList() {
             <h5>Fecha de ingreso: {empleado.hire_date}</h5>
             <h5>salario: ${empleado.salary}</h5>
             <h5>Comision: ${empleado.comission_pct}</h5>
-            <button type="button" className="btn btn-info">
+            <Link
+              to={`detail_employed/${empleado.employee_id}`}
+              type="button"
+              className="btn btn-info"
+            >
               Ver
-            </button>
-            <button onClick={()=>handleDelete(empleado.employee_id)} type="button" className="btn btn-danger mx-3">
+            </Link>
+            <button
+              onClick={() => handleDelete(empleado.employee_id)}
+              type="button"
+              className="btn btn-danger mx-3"
+            >
               Borrar
             </button>
           </div>
@@ -30,12 +38,16 @@ function EmployedList() {
       </div>
     );
   });
-  console.log('listado de empleados: ' + empleados);
+  console.log("listado de empleados: " + empleados);
   return (
     <div className="container">
       <div className="row">
         <div className="col-6 col-md-4 mt-3">
-          <Link to='create_employed' type="button" className="btn btn-success fw-bold mx-2">
+          <Link
+            to="create_employed"
+            type="button"
+            className="btn btn-success fw-bold mx-2"
+          >
             Crear nuevo empleado
           </Link>
         </div>
