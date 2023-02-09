@@ -42,8 +42,24 @@ export const empladosSlice = createSlice({
         },
         deleteEmployed: (state, action)=>{
             state.empleados = state.empleados.filter(empleado => empleado.employee_id !== action.payload)
+        },
+        updateEmployed: (state,action) =>{
+            //desestructuramos el action
+            const {employee_id, first_name, last_name, email, phone_number, hire_date, salary,comission_pct} = action.payload
+            //buscamos en nuestro state, el empleado correspondiente al id que traemos
+            const empleadoEncontrado = state.empleados.find(state => state.employee_id === employee_id)
+            if(empleadoEncontrado){
+                //si el empleado existe, entonces reemplazamos por los valores actuales
+                empleadoEncontrado.first_name = first_name
+                empleadoEncontrado.last_name = last_name
+                empleadoEncontrado.email = email
+                empleadoEncontrado.phone_number = phone_number
+                empleadoEncontrado.hire_date = hire_date
+                empleadoEncontrado.salary = salary
+                empleadoEncontrado.comission_pct = comission_pct
+            }
         }
     }
 })
-export const {addEmployed, deleteEmployed} = empladosSlice.actions
+export const {addEmployed, deleteEmployed,updateEmployed} = empladosSlice.actions
 export default empladosSlice.reducer

@@ -1,12 +1,14 @@
-import React from "react";
-import { useState } from "react";
-import { addEmployed } from "../features/empleados/empleadosSlice";
-import { useNavigate } from "react-router-dom";
+import React, { useEffect,useState } from "react";
+import { addEmployed, updateEmployed } from "../features/empleados/empleadosSlice";
+import { useNavigate, useParams } from "react-router-dom";
 import { v4 as uuid } from "uuid";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 function EmployedForm() {
+  // hooks
   const dispatch = useDispatch();
   const navigate = useNavigate()
+  const params = useParams();
+  const empleados = useSelector((state) => state.employed.empleados);
   const [empleado, setEmpleado] = useState({
     first_name:'',
     last_name:'',
@@ -17,13 +19,24 @@ function EmployedForm() {
     comission_pct: 0
    }
   );
+  //Controlar si existe un parametro
+  useEffect(()=>{
+    if(params.id){
+      setEmpleado( empleados.find(empleado => empleado.employee_id === params.id)) //lo que encuentro con el id lo guardo en el estado  
+    }
+  },[])
   const handleChange = (e) => {
     setEmpleado({ ...empleado, [e.target.name]: e.target.value });
   };
   const handleSubmit = e =>{
     e.preventDefault()
-    dispatch(addEmployed({...empleado, employee_id: uuid()}))
-    navigate('/')   
+    if(params.id){
+      dispatch(updateEmployed(empleado))
+      navigate(`/`)
+    }else{
+      dispatch(addEmployed({...empleado, employee_id: uuid()}))
+      navigate('/')
+    }
   }
   return (
     <div className="container">
@@ -38,6 +51,7 @@ function EmployedForm() {
               className="form-control"
               id="exampleFormControlInput1"
               placeholder="nombre"
+              value={empleado.first_name}
             />
             <label className="my-3">Apellido</label>
             <input
@@ -47,6 +61,7 @@ function EmployedForm() {
               className="form-control"
               id="exampleFormControlInput1"
               placeholder="apellido"
+              value={empleado.last_name}
             />
             <label className="my-3">Correo</label>
             <input
@@ -56,6 +71,7 @@ function EmployedForm() {
               className="form-control"
               id="exampleFormControlInput1"
               placeholder="ejemplo@ejemplo.com"
+              value={empleado.email}
             />
             <label className="my-3">Numero de telefono</label>
             <input
@@ -65,6 +81,7 @@ function EmployedForm() {
               className="form-control"
               id="exampleFormControlInput1"
               placeholder="telefono"
+              value={empleado.phone_number}
             />
             <label className="my-3">Fecha de ingreso</label>
             <input
@@ -74,6 +91,7 @@ function EmployedForm() {
               className="form-control"
               id="exampleFormControlInput1"
               placeholder="Nombre"
+              value={empleado.hire_date}
             />
             <label className="my-3">Salario</label>
             <input
@@ -83,6 +101,7 @@ function EmployedForm() {
               className="form-control"
               id="exampleFormControlInput1"
               placeholder="$"
+              value={empleado.salary}
             />
             <label className="my-3">Comision</label>
             <input
@@ -92,9 +111,10 @@ function EmployedForm() {
               className="form-control"
               id="exampleFormControlInput1"
               placeholder="$"
+              value={empleado.comission_pct}
             />
-            <button type="submit" className="btn btn-primary my-3">
-              Crear empleado
+            <button type="submit" className="btn btn-success my-3">
+              {params.id ? 'Editar empleado' : 'Crear empleado +'}
             </button>
           </form>
         </div>
