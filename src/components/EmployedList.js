@@ -15,10 +15,6 @@ function EmployedList() {
           <div className="card-body">
             <h1 className="card-title">{`${empleado.first_name} ${empleado.last_name}`}</h1>
             <h5>Email: {empleado.email}</h5>
-            <h5>Numero de telefono: {empleado.phone_number}</h5>
-            <h5>Fecha de ingreso: {empleado.hire_date}</h5>
-            <h5>salario: ${empleado.salary}</h5>
-            <h5>Comision: ${empleado.comission_pct}</h5>
             <Link
               to={`detail_employed/${empleado.employee_id}`}
               type="button"
