@@ -1,40 +1,15 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import { deleteEmployed } from "../features/empleados/empleadosSlice";
+import { Employees } from "./home";
 function EmployedList() {
   const dispatch = useDispatch();
+  const [message, setMessage] = useState(false)
   const empleados = useSelector((state) => state.employed.empleados);
   const handleDelete = (id) => {
     dispatch(deleteEmployed(id));
   };
-  const empleadoArray = empleados.map((empleado) => {
-    return (
-      <div className="col-sm-6 mb-sm-0" key={empleado.employee_id}>
-        <div className="card my-3">
-          <div className="card-body">
-            <h1 className="card-title">{`${empleado.first_name} ${empleado.last_name}`}</h1>
-            <h5>Email: {empleado.email}</h5>
-            <Link
-              to={`detail_employed/${empleado.employee_id}`}
-              type="button"
-              className="btn btn-info"
-            >
-              Ver
-            </Link>
-            <button
-              onClick={() => handleDelete(empleado.employee_id)}
-              type="button"
-              className="btn btn-danger mx-3"
-            >
-              Borrar
-            </button>
-          </div>
-        </div>
-      </div>
-    );
-  });
-  console.log("listado de empleados: " + empleados);
   return (
     <div className="container">
       <div className="row">
@@ -48,7 +23,9 @@ function EmployedList() {
           </Link>
         </div>
       </div>
-      <div className="row">{empleadoArray}</div>
+      <div className="row">
+        <Employees employees={empleados} onDelete={handleDelete} />
+      </div>
     </div>
   );
 }
