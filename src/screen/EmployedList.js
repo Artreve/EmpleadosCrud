@@ -1,14 +1,30 @@
-import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import { deleteEmployed } from "../features/empleados/empleadosSlice";
-import { Employees } from "./home";
+import { Employees } from "../home";
+import Swal from "sweetalert2";
 function EmployedList() {
   const dispatch = useDispatch();
-  const [message, setMessage] = useState(false)
   const empleados = useSelector((state) => state.employed.empleados);
   const handleDelete = (id) => {
-    dispatch(deleteEmployed(id));
+    Swal.fire({
+      title: '¿Seguro que deseas eliminar?',
+      text: "Estos cambios no podran ser revertidos",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Si, eliminar'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        Swal.fire(
+          'Deleted!',
+          'Your file has been deleted.',
+          'success'
+        )
+        dispatch(deleteEmployed(id));
+      }
+    })
   };
   return (
     <div className="container">

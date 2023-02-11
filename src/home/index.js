@@ -1,5 +1,5 @@
 import React from "react";
-import ErrorMenssaje from "../common/ErrorMenssage";
+import ErrorMenssaje from '../components/common/ErrorMenssage'
 import { Link } from "react-router-dom";
 function EmployeesList({ employees = [], onDelete }) {
   return (
