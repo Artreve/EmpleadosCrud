@@ -47,17 +47,26 @@ export const empladosSlice = createSlice({
             //desestructuramos el action
             const {employee_id, first_name, last_name, email, phone_number, hire_date, salary,comission_pct} = action.payload
             //buscamos en nuestro state, el empleado correspondiente al id que traemos
-            const empleadoEncontrado = state.empleados.find(state => state.employee_id === employee_id)
-            if(empleadoEncontrado){
+            const empleadoIndex = state.empleados.findIndex(state => state.employee_id === employee_id)
+            console.log(empleadoIndex)
+            const empleadoActualizar =  {...state.empleados[empleadoIndex]}
+            console.log(empleadoActualizar)
+            if(empleadoActualizar){
                 //si el empleado existe, entonces reemplazamos por los valores actuales
-                empleadoEncontrado.first_name = first_name
-                empleadoEncontrado.last_name = last_name
-                empleadoEncontrado.email = email
-                empleadoEncontrado.phone_number = phone_number
-                empleadoEncontrado.hire_date = hire_date
-                empleadoEncontrado.salary = salary
-                empleadoEncontrado.comission_pct = comission_pct
+                empleadoActualizar.first_name = first_name
+                empleadoActualizar.last_name = last_name
+                empleadoActualizar.email = email
+                empleadoActualizar.phone_number = phone_number
+                empleadoActualizar.hire_date = hire_date
+                empleadoActualizar.salary = salary
+                empleadoActualizar.comission_pct = comission_pct
             }
+            //Creo un nuevo array de empleados
+            const nuevosEmpleados = [...state.empleados]
+            //Busco la posicion del id y le asigno los nuevos valores para actualizar
+            nuevosEmpleados[empleadoIndex] = empleadoActualizar
+            //Asigno el nuevo array en el array original
+            state.empleados = [...nuevosEmpleados]
         }
     }
 })

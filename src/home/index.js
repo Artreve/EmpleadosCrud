@@ -1,5 +1,5 @@
 import React from "react";
-import ErrorMenssaje from '../components/common/ErrorMenssage'
+import ErrorMessage from '../components/common/ErrorMenssage'
 import { Link } from "react-router-dom";
 function EmployeesList({ employees = [], onDelete }) {
   return (
@@ -33,12 +33,12 @@ function EmployeesList({ employees = [], onDelete }) {
     </>
   );
 }
-//recibe la lista de empleados y es el que tiene la logica de como se muestra
+//recibe la lista de empleados y es el que tiene la logica de como se renderiza
 export function Employees({ employees, onDelete}) {
   return (
     <>
       {employees.length === 0 ? (
-        <ErrorMenssaje
+        <ErrorMessage
           tittle={"Error"}
           message={"No se encuentran RRHH diponibles"}
         />

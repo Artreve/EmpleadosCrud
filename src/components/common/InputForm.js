@@ -1,6 +1,16 @@
 import React from "react";
 
 function InputForm({ employee, handleChange }) {
+  //Desestructuramos el employee
+  const {
+    first_name,
+    last_name,
+    email,
+    phone_number,
+    hire_date,
+    salary,
+    comission_pct
+  } = employee
   return (
     <>
       <label className="my-3">Nombre</label>
@@ -11,7 +21,7 @@ function InputForm({ employee, handleChange }) {
         className="form-control"
         id="exampleFormControlInput1"
         placeholder="nombre"
-        value={employee.first_name}
+        value={first_name}
       />
       <label className="my-3">Apellido</label>
       <input
@@ -21,7 +31,7 @@ function InputForm({ employee, handleChange }) {
         className="form-control"
         id="exampleFormControlInput1"
         placeholder="apellido"
-        value={employee.last_name}
+        value={last_name}
       />
       <label className="my-3">Correo</label>
       <input
@@ -31,7 +41,7 @@ function InputForm({ employee, handleChange }) {
         className="form-control"
         id="exampleFormControlInput1"
         placeholder="ejemplo@ejemplo.com"
-        value={employee.email}
+        value={email}
       />
       <label className="my-3">Numero de telefono</label>
       <input
@@ -41,7 +51,7 @@ function InputForm({ employee, handleChange }) {
         className="form-control"
         id="exampleFormControlInput1"
         placeholder="telefono"
-        value={employee.phone_number}
+        value={phone_number}
       />
       <label className="my-3">Fecha de ingreso</label>
       <input
@@ -51,7 +61,7 @@ function InputForm({ employee, handleChange }) {
         className="form-control"
         id="exampleFormControlInput1"
         placeholder="Nombre"
-        value={employee.hire_date}
+        value={hire_date}
       />
       <label className="my-3">Salario</label>
       <input
@@ -61,7 +71,7 @@ function InputForm({ employee, handleChange }) {
         className="form-control"
         id="exampleFormControlInput1"
         placeholder="$"
-        value={employee.salary}
+        value={salary}
       />
       <label className="my-3">Comision</label>
       <input
@@ -71,7 +81,7 @@ function InputForm({ employee, handleChange }) {
         className="form-control"
         id="exampleFormControlInput1"
         placeholder="$"
-        value={employee.comission_pct}
+        value={comission_pct}
       />
     </>
   );

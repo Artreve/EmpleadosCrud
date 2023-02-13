@@ -1,6 +1,6 @@
 import React from 'react'
 
-function ErrorMenssaje({tittle, message}) {
+function ErrorMessage({tittle, message}) {
   return (
     <>
     <div className="card text-bg-danger my-3">
@@ -13,4 +13,4 @@ function ErrorMenssaje({tittle, message}) {
   )
 }
 
-export default ErrorMenssaje
+export default ErrorMessage
