@@ -3,32 +3,32 @@ const initialState={
     empleados:[
         {
             employee_id:'340da134-2dde-4dfe-b94f-e76f1071d94b',
-            first_name:'Marcos',
-            last_name:'Rodriguez',
-            email:'juan@juan.com',
+            first_name:'Mariano',
+            last_name:'Fernandez',
+            email:'mariano@fernandez.com',
             phone_number:'123456789',
-            hire_date:'2021-10-12',
-            salary: 5,
-            comission_pct: 10
+            hire_date:'2021-8-13',
+            salary: 50,
+            comission_pct: 100
         },
         {
             employee_id:'99fa9416-d632-4619-9abc-082b248c089b',
             first_name:'Marcos',
             last_name:'Rodriguez',
-            email:'juan@juan.com',
+            email:'marcos@rodriguez.com',
             phone_number:'123456789',
             hire_date:'2021-10-12',
-            salary: 5,
-            comission_pct: 10
+            salary: 50,
+            comission_pct: 60
         },{
             employee_id:'9a14376e-1756-4534-b194-1a1c3d23f2b1',
-            first_name:'Marcos',
-            last_name:'Rodriguez',
-            email:'juan@juan.com',
+            first_name:'Juan',
+            last_name:'Lujan',
+            email:'juan@lujan.com',
             phone_number:'123456789',
-            hire_date:'2021-10-12',
-            salary: 5,
-            comission_pct: 10
+            hire_date:'2023-1-15',
+            salary: 40,
+            comission_pct: 80
         }
     ]
 }
@@ -48,9 +48,7 @@ export const empladosSlice = createSlice({
             const {employee_id, first_name, last_name, email, phone_number, hire_date, salary,comission_pct} = action.payload
             //buscamos en nuestro state, el empleado correspondiente al id que traemos
             const empleadoIndex = state.empleados.findIndex(state => state.employee_id === employee_id)
-            console.log(empleadoIndex)
             const empleadoActualizar =  {...state.empleados[empleadoIndex]}
-            console.log(empleadoActualizar)
             if(empleadoActualizar){
                 //si el empleado existe, entonces reemplazamos por los valores actuales
                 empleadoActualizar.first_name = first_name

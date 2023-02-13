@@ -7,7 +7,7 @@ function EmployeesList({ employees = [], onDelete }) {
       {employees.map((employee) => {
         return (
           <div className="col-sm-6 mb-sm-0" key={employee.employee_id}>
-            <div className="card my-3">
+            <div className="card my-3 shadow-lg">
               <div className="card-body">
                 <h1 className="card-title">{`${employee.first_name} ${employee.last_name}`}</h1>
                 <h5>Email: {employee.email}</h5>
