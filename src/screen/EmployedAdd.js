@@ -4,8 +4,20 @@ import { useNavigate} from "react-router-dom";
 import { v4 as uuid } from "uuid";
 import { useDispatch} from "react-redux";
 import InputForm from "../components/common/InputForm";
-import Swal from "sweetalert2";
+import { successAlert } from "../plugins/alertas";
 function EmployedAdd() {
+  //Funciones
+  const handleChange = (e) => {
+    setEmpleado({ ...empleado, [e.target.name]: e.target.value });
+  };
+  const handleSubmit = (e) => {
+    e.preventDefault();
+      dispatch(addEmployed({ ...empleado, employee_id: uuid() }));
+      successAlert(()=> navigate("/"))
+     
+  };
+
+  //Hooks
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [empleado, setEmpleado] = useState({
@@ -17,21 +29,7 @@ function EmployedAdd() {
     salary: 0,
     comission_pct: 0,
   });
-  const handleChange = (e) => {
-    setEmpleado({ ...empleado, [e.target.name]: e.target.value });
-  };
-  const handleSubmit = (e) => {
-    e.preventDefault();
-      dispatch(addEmployed({ ...empleado, employee_id: uuid() }));
-      Swal.fire({
-        position: 'top',
-        icon: 'success',
-        title: 'Your work has been saved',
-        showConfirmButton: false,
-        timer: 1500
-      })
-      navigate("/");
-  };
+
   return (
     <div className="container">
       <div className="row">

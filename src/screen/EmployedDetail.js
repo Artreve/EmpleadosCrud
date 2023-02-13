@@ -6,6 +6,7 @@ import InputForm from "../components/common/InputForm";
 import EmployedCard from "../components/employeeDetail/EmployeeCard";
 import { Link } from "react-router-dom";
 import { updateEmployed } from "../features/empleados/empleadosSlice";
+import { advertencia } from "../plugins/alertas";
 function EmployedDetail() {
   //Funciones
   const empleadoSearch = () => {
@@ -19,8 +20,10 @@ function EmployedDetail() {
     setEdicion(false);
   };
   const handleConfirmEdition = () => {
-    dispatch(updateEmployed(empleado));
-    navigate("/");
+    advertencia(()=>{
+      dispatch(updateEmployed(empleado))
+      navigate("/")
+    })
   };
 
   //Hooks
